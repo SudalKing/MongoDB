@@ -1,35 +1,42 @@
 package com.sudal.mongodb.domain;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final MongoTemplate mongoTemplate;
 
     public String create(String name) {
         User user = User.builder()
                 .name(name)
                 .build();
 
-        return userRepository.save(user).getId();
+        return mongoTemplate.insert(user, "user").getId();
     }
 
     public User read(String id) {
-        return userRepository.findById(id).orElse(null);
+        Query query = new Query(Criteria.where("id").is(id));
+
+        return mongoTemplate.findOne(query, User.class, "user");
     }
 
     public User update(String id, String name) {
-        User user = userRepository.findById(id).orElse(null);
+        Query query = new Query(Criteria.where("id").is(id));
+        Update update = new Update().set("name", name);
 
-        assert user != null;
-        user.setName(name);
-
-        return userRepository.save(user);
+        return mongoTemplate.findAndModify(query, update, User.class, "user");
     }
 
     public void delete(String id) {
-        userRepository.deleteById(id);
+        Query query = new Query(Criteria.where("id").is(id));
+
+        mongoTemplate.remove(query, User.class, "user");
     }
 }
