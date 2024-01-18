@@ -1,0 +1,40 @@
+### MongoDB 데이터 생성 - @RequestBody
+POST http://localhost:8080/api/v1/user
+Content-Type: application/json
+
+{
+  "name": "test5"
+}
+
+### POST 요청 - @RequestParam
+POST http://localhost:8080/api/v1/user?name=test6
+
+<> 2024-01-18T105739.200.txt
+<> 2024-01-18T105659.200.txt
+<> 2024-01-18T105643.400.json
+<> 2024-01-18T104913.400.json
+<> 2024-01-18T104822.400.json
+<> 2024-01-18T104514.400.json
+<> 2024-01-18T104347.200.txt
+<> 2024-01-18T104337.200.txt
+<> 2024-01-18T103514.200.txt
+<> 2024-01-18T103114.200.txt
+
+###
+GET http://localhost:8080/api/v1/user?id=65a88052e088763ce9dce28b
+Accept: application/json
+
+<> 2024-01-18T154959.200.json
+<> 2024-01-18T154954.200.json
+<> 2024-01-18T105712.200.json
+<> 2024-01-18T104400.200.json
+<> 2024-01-18T103400.200.json
+
+###
+DELETE http://localhost:8080/api/v1/user?id=65a87f61e088763ce9dce28a
+
+###
+PUT http://localhost:8080/api/v1/user?id=65a88052e088763ce9dce28b&name=testPut
+
+<> 2024-01-18T155046.200.json
+<> 2024-01-18T154826.200.json
